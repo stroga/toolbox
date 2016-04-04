@@ -1,13 +1,41 @@
-function MakeObjectChanges() {
+/*
+*@file
+*Provides some methods to work with objects
+*/
 
+/*
+*@param {boolean} isDevelopmentMode
+*	not mandatory parameter that turns on/off logs
+*/
+function makeObjectChanges(isDevelopmentMode) {
 
-		function methodsToWorkWithObjects() {
+		var areLogsShown = !!isDevelopmentMode ? isDevelopmentMode : false;
 
-		}
+		/*
+		*Constructs a methods to work with objects
+		*
+		*@constructor
+		*/
+		function MethodsToWorkWithObjects() {}
 
-		methodsToWorkWithObjects.prototype.log = console.warn.bind(console);
+		MethodsToWorkWithObjects.prototype.log = function(args) {
+			if (areLogsShown) {
+				return console.warn.bind(console, args)();
+			}
+			return function() { return; };
+		};
 
-		methodsToWorkWithObjects.prototype.addToArray = function(ar, el) {
+		/*
+		*Adds any element to array
+		*
+		*@param{Array} arr
+		*	array should be passed 
+		*@param{any} el
+		*
+		*@return
+		*	new created array with added element
+		*/
+		MethodsToWorkWithObjects.prototype.addToArray = function(ar, el) {
 			var _this = this;
 			var arr = ar;
 			if (Object.prototype.toString.call(arr).slice(8, -1) === "Array") {
@@ -22,7 +50,19 @@ function MakeObjectChanges() {
 			return arr;
 		};
 
-		methodsToWorkWithObjects.prototype.addUniqueToArray = function(ar, el) {
+
+		/*
+		*Adds only unique element to array
+		*
+		*@param{Array} arr
+		*	array should be passed 
+		*@param{String|Number} el
+		*
+		*@return
+		*	new created array with added element if it was not already in the array
+		*	otherwise, new created array without changes
+		*/
+		MethodsToWorkWithObjects.prototype.addUniqueToArray = function(ar, el) {
 			var _this = this;
 			var arr = ar;
 			if (Object.prototype.toString.call(arr).slice(8, -1) === "Array") {
@@ -42,8 +82,17 @@ function MakeObjectChanges() {
 			return arr;
 		};
 
-
-		methodsToWorkWithObjects.prototype.removeFromArray = function(ar, el) {
+		/*
+		*To delete element from the array
+		*
+		*@param{Array} arr
+		*	array should be passed 
+		*@param{String|Number} el
+		*
+		*@return
+		*	new created array without removed element
+		*/
+		MethodsToWorkWithObjects.prototype.removeFromArray = function(ar, el) {
 			var _this = this;
 			var arr = ar;
 			if (Object.prototype.toString.call(arr).slice(8, -1) === "Array") {
@@ -63,7 +112,8 @@ function MakeObjectChanges() {
 			}
 			return arr;
 		};
-		methodsToWorkWithObjects.prototype.addPropToObj = function(obj, prop, val) {
+
+		MethodsToWorkWithObjects.prototype.addPropToObj = function(obj, prop, val) {
 			var _this = this;
 			var objectModified = obj;
 			if (Object.prototype.toString.call(objectModified).slice(8, -1) === "Object") {
@@ -79,7 +129,8 @@ function MakeObjectChanges() {
 			}
 			return objectModified;
 		};
-		methodsToWorkWithObjects.prototype.removeObjectProp = function(obj, prop) {
+
+		MethodsToWorkWithObjects.prototype.removeObjectProp = function(obj, prop) {
 			var _this = this;
 			var objectModified = obj;
 			if (Object.prototype.toString.call(objectModified).slice(8, -1) === "Object") {
@@ -95,7 +146,8 @@ function MakeObjectChanges() {
 			}
 			return objectModified;
 		};
-		methodsToWorkWithObjects.prototype.stringifyObj = function(o) {
+
+		MethodsToWorkWithObjects.prototype.stringifyObj = function(o) {
 			var _this = this;
 			if (Object.prototype.toString.call(o).slice(8, -1) === "Array" ||
 				Object.prototype.toString.call(o).slice(8, -1) === "Object") {
@@ -103,7 +155,8 @@ function MakeObjectChanges() {
 			}
 			_this.log("Please, use OBJECT or ARRAY ONLY!");
 		};
-		methodsToWorkWithObjects.prototype.restoreObjFromString = function(stringifiedObj) {
+		
+		MethodsToWorkWithObjects.prototype.restoreObjFromString = function(stringifiedObj) {
 			var _this = this;
 			if (Object.prototype.toString.call(stringifiedObj).slice(8, -1) === "String") {
 				try {
@@ -117,7 +170,13 @@ function MakeObjectChanges() {
 			}
 		};
 
-		return new methodsToWorkWithObjects();
+		return new MethodsToWorkWithObjects();
 	}
 
-	var modObj = MakeObjectChanges();
+	/*
+	*usage example:
+	*	var modObj = makeObjectChanges();
+	*	modObj.addUniqueToArray( [ 1, "24", "test" ], "unique" );  => [ 1, "24", "test", "unique" ]
+	*	modObj.addUniqueToArray( [ 1, "24", ununique ], "ununique" );  => [ 1, "24", "ununique" ]
+	*/
+	
