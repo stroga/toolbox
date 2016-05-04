@@ -1,0 +1,27 @@
+{
+  "name": "package",
+  "version": "0.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Krut Aleks",
+  "license": "ISC",
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "~3.9.1",
+    "gulp-autoprefixer": "~3.1.0",
+    "gulp-concat": "~2.6.0",
+    "gulp-jscs": "~3.0.2",
+    "gulp-jshint": "~2.0.0",
+    "gulp-less": "~3.0.5",
+    "gulp-load-plugins": "~1.2.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "jscs": "~3.0.3",
+    "jshint": "~2.9.2",
+    "jshint-stylish": "~2.2.0"
+  }
+}
