@@ -1,1 +1,1 @@
-Assembler for Campaigns
+assembler of campaigns
